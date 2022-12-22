@@ -13,8 +13,9 @@
                     {!! $item->ringkasan  !!}
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-info">Edit</a>
-                    <a class="btn btn-danger">Hapus</a>
+                    <a href="{{ route('guru.materi.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-info">Detail</a>
+                    <a class="btn btn-sm btn-primary">Edit</a>
+                    <a class="btn btn-sm btn-danger">Hapus</a>
                 </div>
             </div>
         </div>

@@ -6,7 +6,8 @@
         <h6 class="m-0 font-weight-bold text-primary">{{ $pembelajaran->pelajaran->nama }} - {{ $pembelajaran->kelas->first()->nama }}</h6>
     </div>
     <div class="card-body">
-        <a href="{{ route('guru.materi.create', ['pembelajaranId' => $pembelajaran->id]) }}" class="btn btn-primary">Tambah Materi</a>
+        <a href="{{ route('guru.pembelajaran.index') }}" class="btn btn-sm btn-primary">Kembali</a>
+        <a href="{{ route('guru.materi.create', ['pembelajaranId' => $pembelajaran->id]) }}" class="btn btn-sm btn-primary">Tambah Materi</a>
         @include('pages.guru.materi.list')
     </div>
 </div>

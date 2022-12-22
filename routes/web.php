@@ -98,6 +98,7 @@ Route::prefix('guru')
             ->group(function () {
                 Route::get('/create/{pembelajaranId}', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'detail')->name('detail');
             });
     });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

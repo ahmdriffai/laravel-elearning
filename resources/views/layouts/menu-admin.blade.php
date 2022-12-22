@@ -62,7 +62,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Guru :</h6>
             <a class="collapse-item" href="{{ route('admin.guru.index') }}">List Guru</a>
-            <a class="collapse-item" href="{{ route('admin.siswa.create') }}">Tambah Guru</a>
+            <a class="collapse-item" href="{{ route('admin.guru.create') }}">Tambah Guru</a>
         </div>
     </div>
 </li>

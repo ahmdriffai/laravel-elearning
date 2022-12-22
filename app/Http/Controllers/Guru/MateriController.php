@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MateriAddRequest;
+use App\Models\Materi;
 use App\Repositories\MateriRepository;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,7 @@ class MateriController extends Controller
             'judul' => $request->input('judul'),
             'ringkasan' => $request->input('ringkasan'),
             'isi' => $request->input('isi'),
+            'link_youtube' => $request->input('link_youtube'),
             'pembelajaran_id' => $request->input('pembelajaran_id'),
         ];
 
@@ -36,5 +38,10 @@ class MateriController extends Controller
         }catch (\Exception $exception) {
             abort(500, 'Server Error');
         }
+    }
+
+    public function detail($id) {
+        $materi = Materi::find($id);
+        return view('pages.guru.materi.detail', compact('materi'));
     }
 }

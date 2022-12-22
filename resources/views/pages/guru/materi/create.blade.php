@@ -27,6 +27,15 @@
                             {!! Form::textarea('ringkasan', null, array('class' => 'form-control', 'id' => 'ringkasan', 'width' => '100%')) !!}
                         </div>
                     </div>
+                    <div class="form-group">
+                        {!! Form::label('link_youtube', 'Link Youtube'); !!}
+                        {!! Form::text('link_youtube', null, ['class' => 'form-control', 'placeholder' => 'ex: 10A']) !!}
+                        <div class="form-text">* kosongkan jika tidak ada link youtube</div>
+                        <div class="form-text">
+                            untuk panduan link youtube bisa
+                            <a href="https://www.webhozz.com/blog/cara-memasukkan-video-youtube-ke-dalam-html/" target="_blank">lihat disini</a>
+                        </div>
+                    </div>
 
                     {!! Form::submit('Tambah', ['class' => ['btn', 'btn-primary']]); !!}
                     {!! Form::close() !!}
