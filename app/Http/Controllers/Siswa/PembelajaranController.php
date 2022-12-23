@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\DiskusiPembelajaran;
 use App\Models\Materi;
 use App\Models\Pembelajaran;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class PembelajaranController extends Controller
     public function detail($id) {
         $pembelajaran = Pembelajaran::find($id);
         $materi = Materi::where('pembelajaran_id', $pembelajaran->id)->get();
+        $diskusiPembelajaran = DiskusiPembelajaran::where('pembelajaran_id', $pembelajaran->id)->paginate(10);
 
-        return view('pages.siswa.pembelajaran.detail', compact('pembelajaran', 'materi'));
+        return view('pages.siswa.pembelajaran.detail', compact('pembelajaran', 'materi', 'diskusiPembelajaran'));
     }
 }

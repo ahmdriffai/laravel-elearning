@@ -12,6 +12,9 @@
                 <div class="card-body">
                     {!! $item->ringkasan  !!}
                 </div>
+                <div class="card-footer">
+                    <a href="{{ route('siswa.materi.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-warning">Lihat materi</a>
+                </div>
             </div>
         </div>
     @endforeach

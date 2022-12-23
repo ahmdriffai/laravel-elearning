@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('form-login');
 });
 
 Route::controller(\App\Http\Controllers\LoginController::class)
@@ -25,6 +25,7 @@ Route::controller(\App\Http\Controllers\LoginController::class)
         Route::get('/logout', 'logout')->name('logout');
     });
 
+Route::middleware(['auth'])->get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 Route::prefix('admin')
     ->middleware(['auth', 'can:admin'])
     ->as('admin.')
@@ -113,5 +114,23 @@ Route::prefix('siswa')
                 Route::get('/', 'index')->name('index');
                 Route::get('/{id}/', 'detail')->name('detail');
             });
+        Route::controller(\App\Http\Controllers\Siswa\MateriController::class)
+            ->prefix('materi')
+            ->as('materi.')
+            ->group(function () {
+                Route::get('/{id}', 'detail')->name('detail');
+            });
+    });
+
+Route::middleware(['auth', 'can:siswa'])
+    ->group(function () {
+        Route::controller(\App\Http\Controllers\DiskusiPembelajaranController::class)
+        ->prefix('diskusi-pembelajaran')
+        ->as('diskusi-pembelajaran.')
+        ->group(function () {
+            Route::post('/', 'store')->name('store');
+            Route::get('/{id}/vote', 'vote')->name('vote');
+            Route::get('/{id}/unvote', 'unvote')->name('unvote');
+        });
     });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

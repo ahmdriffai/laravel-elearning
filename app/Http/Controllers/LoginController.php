@@ -23,7 +23,7 @@ class LoginController extends Controller
         try {
             $login = $this->userService->login($request);
             if ($login) {
-                return redirect('/');
+                return redirect()->route('dashboard');
             }
 
             return redirect()->back()->with('error', 'Username dan password tidak sesuai')

@@ -183,6 +183,7 @@ return [
         App\Providers\PembelajaranProvider::class,
         App\Providers\TahunAjaranProvider::class,
         App\Providers\MateriProvider::class,
+        App\Providers\DiskusiPembelajaranProvider::class,
 
 
     ],
