@@ -35,13 +35,11 @@
                             <td>#</td>
                             <td>{{ $item->tahunAjaran->tahun }} / {{ $item->tahunAjaran->semester }}</td>
                             <td>
-                                @foreach($item->kelas as $kelas)
-                                    {{ $kelas->nama }} ,
-                                @endforeach
+                                {{ $item->kelas->nama }}
                             </td>
                             <td>{{ $item->guru->nama }}</td>
                             <td>{{ $item->pelajaran->nama }}</td>
-                            <td rowspan="{{ $kelas->count() }}">
+                            <td>
                                 <a class="btn btn-sm btn-info">Edit</a>
                                 {!! Form::open( ['route' => ['admin.pelajaran.delete', 'id' => $item->id], 'method' => 'delete'])  !!}
                                 {!! Form::submit('Hapus', ['class' => ['btn', 'btn-sm','btn-danger']]); !!}

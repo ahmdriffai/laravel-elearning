@@ -4,16 +4,18 @@
 namespace App\Repositories\Eloquent;
 
 
+use App\Models\Kelas;
 use App\Models\Pembelajaran;
 use App\Repositories\PembelajaranReposiory;
 
 class PembelajaranRepositoryImpl implements PembelajaranReposiory
 {
 
-    function create($detail)
+    function create($detail, $kelasId)
     {
+        $kelas = Kelas::find($kelasId);
         $pembelajaran = new Pembelajaran($detail);
-        $pembelajaran->save();
+        $kelas->pembelajaran()->save($pembelajaran);
         return $pembelajaran;
     }
 

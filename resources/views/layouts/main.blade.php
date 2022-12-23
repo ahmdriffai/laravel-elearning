@@ -47,6 +47,9 @@
         @can('guru')
             @include('layouts.menu-guru')
         @endcan
+        @can('siswa')
+            @include('layouts.menu-siswa')
+        @endcan
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

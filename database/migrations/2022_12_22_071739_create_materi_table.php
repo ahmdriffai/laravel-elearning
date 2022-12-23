@@ -19,6 +19,7 @@ class CreateMateriTable extends Migration
             $table->text('ringkasan');
             $table->text('isi');
             $table->string('link_youtube')->nullable();
+            $table->string('file')->nullable();
             $table->unsignedBigInteger('pembelajaran_id');
             $table->foreign('pembelajaran_id')
                 ->references('id')->on('pembelajaran');

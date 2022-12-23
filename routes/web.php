@@ -101,4 +101,17 @@ Route::prefix('guru')
                 Route::get('/{id}', 'detail')->name('detail');
             });
     });
+
+Route::prefix('siswa')
+    ->middleware(['auth', 'can:siswa'])
+    ->as('siswa.')
+    ->group(function () {
+        Route::controller(\App\Http\Controllers\Siswa\PembelajaranController::class)
+            ->prefix('pembelajaran')
+            ->as('pembelajaran.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{id}/', 'detail')->name('detail');
+            });
+    });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

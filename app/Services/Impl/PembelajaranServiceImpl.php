@@ -62,12 +62,14 @@ class PembelajaranServiceImpl implements PembelajaranService
             DB::beginTransaction();
             $kelas = $request->input('kelas_id');
 
-            $pembelajaran = $this->pembelajaranRepositoy->create($detail);
+            for ($i = 0; $i < count($kelas); $i++) {
+                $pembelajaran = $this->pembelajaranRepositoy->create($detail, $kelas[$i]);
+            }
 
-            $pembelajaran->kelas()->attach($kelas);
             DB::commit();
             return $pembelajaran;
         }catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollBack();
         }
 

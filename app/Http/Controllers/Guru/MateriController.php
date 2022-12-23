@@ -33,9 +33,11 @@ class MateriController extends Controller
 
         try {
             $materi = $this->materiRepository->create($detail);
-            return redirect()->route('guru.pembelajaran.detail', ['id' => $materi->pembelajaran_id])
+
+            return redirect()->route('guru.pembelajaran.detail', ['id' => $materi->pembelajaran_id, 'idKelas' => $materi->kelas_id])
                 ->with('success', 'Materi berhasil ditambahkan');
         }catch (\Exception $exception) {
+            dd($exception->getMessage());
             abort(500, 'Server Error');
         }
     }

@@ -12,4 +12,7 @@ class Materi extends Model
     protected $table = 'materi';
     protected $guarded = [];
 
+    public function pembelajaran() {
+        return $this->belongsTo(Pembelajaran::class);
+    }
 }

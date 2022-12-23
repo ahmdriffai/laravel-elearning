@@ -18,12 +18,15 @@ class CreatePembelajaranTable extends Migration
             $table->unsignedBigInteger('guru_id');
             $table->unsignedBigInteger('pelajaran_id');
             $table->unsignedBigInteger('tahun_ajaran_id');
+            $table->unsignedBigInteger('kelas_id');
             $table->foreign('guru_id')
                 ->references('id')->on('guru');
             $table->foreign('pelajaran_id')
                 ->references('id')->on('pelajaran');
             $table->foreign('tahun_ajaran_id')
                 ->references('id')->on('tahun_ajaran');
+            $table->foreign('kelas_id')
+                ->references('id')->on('kelas');
             $table->timestamps();
         });
     }
