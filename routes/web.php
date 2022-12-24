@@ -122,7 +122,7 @@ Route::prefix('siswa')
             });
     });
 
-Route::middleware(['auth', 'can:siswa'])
+Route::middleware(['auth', 'can:create-diskusi'])
     ->group(function () {
         Route::controller(\App\Http\Controllers\DiskusiPembelajaranController::class)
         ->prefix('diskusi-pembelajaran')

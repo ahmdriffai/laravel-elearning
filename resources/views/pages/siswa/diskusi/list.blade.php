@@ -18,7 +18,9 @@
             <small class="py-4 ml-1">{{ $item->created_at }}</small>
             <div class="d-flex align-items-center my-1">
                 <img class="img-profile rounded-circle" src="{{ asset('/img/user.png') }}" width="30px" height="30px">
-                <h6 class="m-0 font-weight-bold text-gray-800 ml-3"> {{ $item->user->siswa->nama }} </h6>
+                <h6 class="m-0 font-weight-bold text-gray-800 ml-3"> 
+                    {{ $item->user->siswa->nama ?? $item->user->guru->nama }} 
+                </h6>
             </div>
             {!! $item->komentar !!}
         </div>
