@@ -9,8 +9,10 @@
             </div>
             <div class="card-body">
                 <a href="{{ route('guru.pembelajaran.index') }}" class="btn btn-sm btn-primary">Kembali</a>
-                <a href="{{ route('guru.materi.create', ['pembelajaranId' => $pembelajaran->id]) }}" class="btn btn-sm btn-primary">Tambah Materi</a>
+                <a href="{{ route('guru.materi.create', ['pembelajaranId' => $pembelajaran->id]) }}" class="btn btn-sm btn-success">Tambah Materi</a>
+                <a href="{{ route('guru.tugas.create', ['pembelajaranId' => $pembelajaran->id]) }}" class="btn btn-sm btn-warning">Buat Tugas</a>
                 @include('pages.guru.materi.list')
+                @include('pages.guru.tugas.list')
             </div>
         </div>
     </div>

@@ -36,6 +36,7 @@ class PembelajaranServiceImpl implements PembelajaranService
         $tahunAjaran = $this->tahunAjaranRepository->findByIsActive();
         $idGuru = $request->input('guru_id');
         $idPelajaran = $request->input('pelajaran_id');
+        $kelas = $request->input('kelas_id');
         if ($tahunAjaran == null) {
             throw new TahunAjaranNotExistException();
         }
@@ -48,19 +49,21 @@ class PembelajaranServiceImpl implements PembelajaranService
 
         //cek pembelajaran
 
-        $check = $this->pembelajaranRepositoy->findByGuruPelajaranTahunAjaran(
-            $idGuru,
-            $idPelajaran,
-            $tahunAjaran->id
-        );
-
-        if ($check != null) {
-            throw new PembelajaranIsExist();
+        for ($i = 0; $i < count($kelas); $i++) {
+            $check = $this->pembelajaranRepositoy->findByGuruPelajaranTahunAjaran(
+                $idGuru,
+                $idPelajaran,
+                $tahunAjaran->id,
+                $kelas[$i],
+            );
+    
+            if ($check != null) {
+                throw new PembelajaranIsExist();
+            }
         }
 
         try {
             DB::beginTransaction();
-            $kelas = $request->input('kelas_id');
 
             for ($i = 0; $i < count($kelas); $i++) {
                 $pembelajaran = $this->pembelajaranRepositoy->create($detail, $kelas[$i]);

@@ -184,6 +184,7 @@ return [
         App\Providers\TahunAjaranProvider::class,
         App\Providers\MateriProvider::class,
         App\Providers\DiskusiPembelajaranProvider::class,
+        App\Providers\TugasProvider::class,
 
 
     ],

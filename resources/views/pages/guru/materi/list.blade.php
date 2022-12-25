@@ -1,5 +1,10 @@
 <div class="accordion" id="accordionExample">
     <h5 class="m-0 font-weight-bold text-black my-4 ml-2">Daftar Materi Pembelajaran</h5>
+    @if($materi->count() == 0)
+        <div class="alert alert-primary" role="alert">
+            Materi Belum Tersedia
+        </div>
+    @endif
     @foreach($materi as $item)
         <div class="card border mb-4">
             <!-- Card Header - Accordion -->

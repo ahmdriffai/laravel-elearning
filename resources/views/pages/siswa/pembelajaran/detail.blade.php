@@ -9,11 +9,12 @@
             </div>
             <div class="card-body">
                 <a href="{{ route('siswa.pembelajaran.index') }}" class="btn btn-sm btn-primary">Kembali</a>
-                <h5 class="m-0 font-weight-bold text-black my-4 ml-2">Deskripsi Pelajaran</h5>
+                <h5 class="m-0 font-weight-bold text-black mt-3 mb-1 ml-2">Deskripsi Pelajaran</h5>
                 <p class="mx-2">
                     {{ $pembelajaran->pelajaran->deskripsi }}
                 </p>
                 @include('pages.siswa.materi.list')
+                @include('pages.siswa.tugas.list')
             </div>
         </div>
     </div>

@@ -16,4 +16,10 @@ class Siswa extends Model
     public function kelas() {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function tugas() {
+        return $this->belongsToMany(Tugas::class,'tugas_siswa')
+            ->withPivot('file_tugas', 'ringkasan_tugas', 'nilai')
+            ->withTimestamps();
+    }
 }

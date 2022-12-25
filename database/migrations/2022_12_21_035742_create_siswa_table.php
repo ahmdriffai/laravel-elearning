@@ -22,7 +22,7 @@ class CreateSiswaTable extends Migration
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('no_hp')->nullable();
             $table->foreignId('kelas_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

@@ -20,11 +20,12 @@ class PembelajaranRepositoryImpl implements PembelajaranReposiory
     }
 
 
-    function findByGuruPelajaranTahunAjaran($idGuru, $idPelajaran, $tahunAjaran)
+    function findByGuruPelajaranTahunAjaran($idGuru, $idPelajaran, $tahunAjaran, $kelasId)
     {
         return Pembelajaran::where('guru_id', $idGuru)
             ->where('pelajaran_id', $idPelajaran)
             ->where('tahun_ajaran_id', $tahunAjaran)
+            ->where('kelas_id', $kelasId)
             ->first();
     }
 }

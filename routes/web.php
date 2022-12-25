@@ -101,6 +101,15 @@ Route::prefix('guru')
                 Route::post('/', 'store')->name('store');
                 Route::get('/{id}', 'detail')->name('detail');
             });
+        Route::controller(\App\Http\Controllers\Guru\TugasController::class)
+            ->prefix('tugas')
+            ->as('tugas.')
+            ->group(function () {
+                Route::get('/create/{pembelajaranId}', 'create')->name('create');
+                Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'detail')->name('detail');
+
+            });
     });
 
 Route::prefix('siswa')
@@ -119,6 +128,12 @@ Route::prefix('siswa')
             ->as('materi.')
             ->group(function () {
                 Route::get('/{id}', 'detail')->name('detail');
+            });
+        Route::controller(\App\Http\Controllers\Siswa\TugasController::class)
+            ->prefix('tugas')
+            ->as('tugas.')
+            ->group(function () {
+                Route::post('/submit', 'submit')->name('submit');
             });
     });
 
