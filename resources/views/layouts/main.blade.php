@@ -312,6 +312,7 @@
 </div>
 
 
+@include('layouts.script')
 
 @yield('script')
 

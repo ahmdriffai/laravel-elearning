@@ -8,14 +8,16 @@
     @foreach($materi as $item)
         <div class="card border mb-4">
             <!-- Card Header - Accordion -->
-            <a href="#collapseCardExample{{ $item->id }}" class="d-block card-header py-3" data-toggle="collapse"
-               role="button" aria-expanded="true" aria-controls="collapseCardExample{{ $item->id }}">
+            <a href="#materi{{ $item->id }}" class="d-block card-header py-3" data-toggle="collapse"
+               role="button" aria-expanded="true" aria-controls="materi{{ $item->id }}">
                 <h6 class="m-0 font-weight-bold text-primary">{{ $item->judul }}</h6>
             </a>
             <!-- Card Content - Collapse -->
-            <div class="collapse" id="collapseCardExample{{ $item->id }}">
+            <div class="collapse" id="materi{{ $item->id }}">
                 <div class="card-body">
                     {!! $item->ringkasan  !!}
+                    <h6 class="m-0 font-weight-bold text-primary">File materi</h6>
+                    <a target="_blank" href="{{ Storage::disk('public')->url($item->file) }}">View / Download</a>
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('guru.materi.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-info">Detail</a>

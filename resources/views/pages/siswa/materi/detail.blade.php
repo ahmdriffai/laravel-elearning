@@ -15,6 +15,8 @@
             <div class="mt-3">
                 {!! $materi->isi !!}
             </div>
+            <h6 class="m-0 font-weight-bold text-primary">File materi</h6>
+            <a href="{{ Storage::disk('public')->url($item->file) }}">View / Download</a>
         </div>
     </div>
 @endsection

@@ -13,4 +13,10 @@ class TugasRepositoryImpl implements TugasRepository
         $tugas->save();
         return $tugas;
     }
+
+    function update($id, $detail)
+    {
+        Tugas::whereId($id)->update($detail);
+        return Tugas::find($id);
+    }
 }

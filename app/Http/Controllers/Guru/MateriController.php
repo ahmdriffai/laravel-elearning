@@ -6,15 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MateriAddRequest;
 use App\Models\Materi;
 use App\Repositories\MateriRepository;
+use App\Services\MateriService;
 use Illuminate\Http\Request;
 
 class MateriController extends Controller
 {
-    private $materiRepository;
+    private $materiService;
 
-    public function __construct(MateriRepository $materiRepository)
+
+    public function __construct(MateriService $materiService)
     {
-        $this->materiRepository = $materiRepository;
+        $this->materiService = $materiService;
     }
 
 
@@ -23,21 +25,13 @@ class MateriController extends Controller
     }
 
     public function store(MateriAddRequest $request) {
-        $detail = [
-            'judul' => $request->input('judul'),
-            'ringkasan' => $request->input('ringkasan'),
-            'isi' => $request->input('isi'),
-            'link_youtube' => $request->input('link_youtube'),
-            'pembelajaran_id' => $request->input('pembelajaran_id'),
-        ];
-
         try {
-            $materi = $this->materiRepository->create($detail);
+            $materi = $this->materiService->add($request);
+            $this->materiService->uploadFile($materi->id, $request->file('file'));
 
             return redirect()->route('guru.pembelajaran.detail', ['id' => $materi->pembelajaran_id, 'idKelas' => $materi->kelas_id])
                 ->with('success', 'Materi berhasil ditambahkan');
         }catch (\Exception $exception) {
-            dd($exception->getMessage());
             abort(500, 'Server Error');
         }
     }

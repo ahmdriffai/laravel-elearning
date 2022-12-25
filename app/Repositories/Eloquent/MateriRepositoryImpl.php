@@ -16,4 +16,10 @@ class MateriRepositoryImpl implements MateriRepository
         $materi->save();
         return $materi;
     }
+
+    function update($id, $detail)
+    {
+        Materi::whereId($id)->update($detail);
+        return Materi::find($id);
+    }
 }

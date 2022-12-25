@@ -27,7 +27,8 @@ class MateriAddRequest extends FormRequest
             'judul' => ['required'],
             'isi' => ['required'],
             'ringkasan' => ['required'],
-            'pembelajaran_id' => ['required']
+            'pembelajaran_id' => ['required'],
+            'file' => ['required', 'mimes:pdf', 'max:10000'],
         ];
     }
 }

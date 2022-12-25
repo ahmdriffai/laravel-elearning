@@ -8,7 +8,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabmah Kelas</h6>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['route' => 'guru.materi.store', 'method' => 'post']) !!}
+                    {!! Form::open(['route' => 'guru.materi.store', 'method' => 'post', 'files' => true]) !!}
 
                     {{ Form::hidden('pembelajaran_id', $pembelajaranId) }}
                     <div class="form-group">
@@ -26,6 +26,11 @@
                         <div class="input-group input-group-merge">
                             {!! Form::textarea('ringkasan', null, array('class' => 'form-control', 'id' => 'ringkasan', 'width' => '100%')) !!}
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('file', 'File Materi'); !!}
+                        {!! Form::file('file', ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('link_youtube', 'Link Youtube'); !!}
