@@ -40,7 +40,10 @@
             <td>{{ $item->pivot->created_at }}</td>
             <td>{{ $item->pivot->nilai }}</td>
             <td>
-                <a class="btn btn-sm btn-info">Buat Nilai</a>
+                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#staticBackdrop{{ $item->id }}">
+                    Update Nilai
+                </button>
+                @include('pages.guru.tugas.update-nilai')
             </td>
         </tr>
         @endforeach

@@ -10,6 +10,7 @@ use App\Models\Tugas;
 use App\Repositories\TugasRepository;
 use App\Services\TugasService;
 use App\Utils\Media;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\UnauthorizedException;
 
 class TugasServiceImpl implements TugasService
@@ -45,12 +46,41 @@ class TugasServiceImpl implements TugasService
 
         $pathFile = $this->uploads($file, '/tugas/file/');
 
-        $siswa->tugas()->syncWithPivotValues($tugasId, [
+        $tugassiswa = Siswa::whereHas('tugas', function ($q) use ($tugasId) {
+           $q->where('tugas.id', $tugasId);
+        })->get();
+
+        if (count($tugassiswa) > 0){
+            DB::table('tugas_siswa')->where('siswa_id', $siswaId)
+                ->where('tugas_id', $tugasId)->delete();
+        }
+
+        $siswa->tugas()->attach($tugasId, [
             'file_tugas' => $pathFile,
             'ringkasan_tugas' => $ringkasanTugas,
         ]);
 
         return $siswa;
 
+    }
+
+    function uploadFile($id, $file)
+    {
+        $upload = $this->uploads($file, '/tugas/file/');
+
+        $detail = [
+            'file' => $upload,
+        ];
+
+        $materi = $this->tugasRepository->update($id, $detail);
+        return $materi;
+    }
+
+    function updateNilai($tugasId, $siswaId, $nilai)
+    {
+        return DB::table('tugas_siswa')->where('siswa_id', $siswaId)
+            ->where('tugas_id', $tugasId)->update([
+                'nilai' => $nilai
+            ]);
     }
 }

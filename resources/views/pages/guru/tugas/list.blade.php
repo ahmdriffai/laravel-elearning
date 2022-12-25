@@ -16,6 +16,8 @@
             <div class="collapse" id="tugas{{ $item->id }}">
                 <div class="card-body">
                     {!! $item->ringkasan  !!}
+                    <h6 class="m-0 font-weight-bold text-primary">Dokumen</h6>
+                    <a target="_blank" href="{{ Storage::disk('public')->url($item->file) }}">View / Download</a>
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('guru.tugas.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-info">Detail</a>

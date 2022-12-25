@@ -108,7 +108,7 @@ Route::prefix('guru')
                 Route::get('/create/{pembelajaranId}', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
                 Route::get('/{id}', 'detail')->name('detail');
-
+                Route::post('/update-nilai', 'updateNilai')->name('update-nilai');
             });
     });
 

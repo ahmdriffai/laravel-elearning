@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TugasAddRequest;
+use App\Http\Requests\TugasUpdateNilaiRequest;
 use App\Models\Tugas;
 use App\Services\TugasService;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class TugasController extends Controller
     public function store(TugasAddRequest $request) {
         try {
             $tugas = $this->tugasService->add($request);
+            $this->tugasService->uploadFile($tugas->id, $request->file('file'));
             return redirect()->route('guru.pembelajaran.detail', [
                 'id' => $tugas->pembelajaran_id,
                 'idKelas' => $tugas->kelas_id]
@@ -42,4 +44,16 @@ class TugasController extends Controller
         return view('pages.guru.tugas.detail', compact('tugas'));
     }
 
+    public function updateNilai(TugasUpdateNilaiRequest $request) {
+        try {
+            $this->tugasService->updateNilai(
+                $request->input('tugas_id'),
+                $request->input('siswa_id'),
+                $request->input('nilai'),
+            );
+            return redirect()->back()->with('success' , 'Nilai berhasil di update');
+        }catch (Exception $exception) {
+            abort(500);
+        }
+    }
 }

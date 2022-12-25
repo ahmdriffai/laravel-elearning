@@ -7,9 +7,13 @@
         </div>
         <div class="card-body">
             {!! $tugas->ringkasan !!}
+            <br>
+            <h6 class="m-0 font-weight-bold text-primary">Dokumen</h6>
+            <a target="_blank" href="{{ Storage::disk('public')->url($tugas->file) }}">View / Download</a>
 
             <h6 class="m-0 font-weight-bold text-primary my-3">Pengumpulan Tugas Siswa</h6>
             @include('pages.guru.tugas.list-siswa')
+
 
         </div>
     </div>

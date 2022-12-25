@@ -21,7 +21,7 @@ class MateriServiceImpl implements MateriService
 
     function uploadFile($id, $file)
     {
-        $upload = $this->uploads($file, '/mater/file');
+        $upload = $this->uploads($file, '/mater/file/');
 
         $detail = [
             'file' => $upload,

@@ -8,7 +8,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Buat Tugas Pembelajaran</h6>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['route' => 'guru.tugas.store', 'method' => 'post']) !!}
+                    {!! Form::open(['route' => 'guru.tugas.store', 'method' => 'post', 'files' => true]) !!}
 
                     {{ Form::hidden('pembelajaran_id', $pembelajaranId) }}
                     <div class="form-group">
@@ -22,6 +22,10 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        {!! Form::label('file', 'File Tugas'); !!}
+                        {!! Form::file('file', ['class' => 'form-control']) !!}
+                    </div>
                     {!! Form::submit('Tambah', ['class' => ['btn', 'btn-primary']]); !!}
                     {!! Form::close() !!}
                 </div>

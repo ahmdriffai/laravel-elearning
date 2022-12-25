@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TugasAddRequest extends FormRequest
+class TugasUpdateNilaiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class TugasAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'judul' => ['required'],
-            'ringkasan' => ['required'],
-            'pembelajaran_id' => ['required'],
-            'file' => ['required'],
+            'tugas_id' => ['required'],
+            'siswa_id' => ['required'],
+            'nilai' => ['required'],
         ];
     }
 }
