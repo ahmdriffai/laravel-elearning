@@ -5,6 +5,7 @@ namespace App\Services\Impl;
 
 use App\Http\Requests\TugasAddRequest;
 use App\Http\Requests\TugasSubmitRequest;
+use App\Models\Siswa;
 use App\Models\Tugas;
 use App\Repositories\TugasRepository;
 use App\Services\TugasService;
@@ -36,7 +37,7 @@ class TugasServiceImpl implements TugasService
         $ringkasanTugas = $request->input('ringkasan_tugas');
         $tugasId = $request->input('tugas_id');
 
-        $tugas = Tugas::find($tugasId);
+        $siswa = Siswa::find($siswaId);
 
         if ($siswaId == null) {
             throw new UnauthorizedException();
@@ -44,12 +45,12 @@ class TugasServiceImpl implements TugasService
 
         $pathFile = $this->uploads($file, '/tugas/file/');
 
-        $tugas->siswa()->syncWithPivotValues($siswaId, [
+        $siswa->tugas()->syncWithPivotValues($tugasId, [
             'file_tugas' => $pathFile,
             'ringkasan_tugas' => $ringkasanTugas,
         ]);
 
-        return $tugas;
+        return $siswa;
 
     }
 }
