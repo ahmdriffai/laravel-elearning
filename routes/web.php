@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ Route::get('/', function () {
 
 Route::controller(\App\Http\Controllers\LoginController::class)
     ->prefix('login')
-    ->group(function() {
+    ->group(function () {
         Route::get('/', 'login')->name('form-login');
         Route::post('/', 'postLogin')->name('post-login');
         Route::get('/logout', 'logout')->name('logout');
@@ -33,7 +34,7 @@ Route::prefix('admin')
         Route::controller(\App\Http\Controllers\Admin\KelasController::class)
             ->prefix('kelas')
             ->as('kelas.')
-            ->group(function() {
+            ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
                 Route::delete('/{id}', 'delete')->name('delete');
@@ -41,7 +42,7 @@ Route::prefix('admin')
         Route::controller(\App\Http\Controllers\Admin\PelajaranController::class)
             ->prefix('pelajaran')
             ->as('pelajaran.')
-            ->group(function() {
+            ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
                 Route::delete('/{id}', 'delete')->name('delete');
@@ -51,7 +52,7 @@ Route::prefix('admin')
         Route::controller(\App\Http\Controllers\Admin\SiswaController::class)
             ->prefix('siswa')
             ->as('siswa.')
-            ->group(function() {
+            ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
@@ -62,7 +63,7 @@ Route::prefix('admin')
         Route::controller(\App\Http\Controllers\Admin\GuruController::class)
             ->prefix('guru')
             ->as('guru.')
-            ->group(function() {
+            ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
@@ -73,11 +74,19 @@ Route::prefix('admin')
         Route::controller(\App\Http\Controllers\Admin\PembelajaranController::class)
             ->prefix('pembelajaran')
             ->as('pembelajaran.')
-            ->group(function() {
+            ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
                 Route::delete('/{id}', 'delete')->name('delete');
+            });
+
+        Route::controller(\App\Http\Controllers\Admin\UserController::class)
+            ->prefix('user')
+            ->as('user.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/generate-password/{id}', 'generatePassword')->name('generate-password');
             });
     });
 
@@ -112,6 +121,7 @@ Route::prefix('guru')
             });
     });
 
+
 Route::prefix('siswa')
     ->middleware(['auth', 'can:siswa'])
     ->as('siswa.')
@@ -140,12 +150,18 @@ Route::prefix('siswa')
 Route::middleware(['auth', 'can:create-diskusi'])
     ->group(function () {
         Route::controller(\App\Http\Controllers\DiskusiPembelajaranController::class)
-        ->prefix('diskusi-pembelajaran')
-        ->as('diskusi-pembelajaran.')
-        ->group(function () {
-            Route::post('/', 'store')->name('store');
-            Route::get('/{id}/vote', 'vote')->name('vote');
-            Route::get('/{id}/unvote', 'unvote')->name('unvote');
-        });
+            ->prefix('diskusi-pembelajaran')
+            ->as('diskusi-pembelajaran.')
+            ->group(function () {
+                Route::post('/', 'store')->name('store');
+                Route::get('/{id}/vote', 'vote')->name('vote');
+                Route::get('/{id}/unvote', 'unvote')->name('unvote');
+            });
     });
+
+Route::middleware('auth')->controller(UserController::class)->group(function () {
+    Route::get('/changepassword', 'formChangePassword')->name('form-changepassword');
+    Route::post('/changepassword', 'postChangePassword')->name('post-changepassword');
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
