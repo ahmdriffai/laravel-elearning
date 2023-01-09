@@ -26,8 +26,9 @@
                     @if(count($item->siswa) != 0)
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#staticBackdrop{{ $item->id }}">
                             Submit Ulang Tugas
+
                         </button>
-                        <a href="{{ Storage::disk('public')->url($item->file) }}">file-tugas.pdf</a>
+                        <a href="{{ Storage::disk('public')->url($item->siswa->first()->pivot->file_tugas) }}">file-tugas.pdf</a>
                     @else
                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#staticBackdrop{{ $item->id }}">
                             Submit Tugas
