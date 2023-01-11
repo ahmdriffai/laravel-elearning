@@ -27,4 +27,10 @@ class SiswaRepositoryImpl implements SiswaRepository
     {
         // TODO: Implement getAll() method.
     }
+
+    function update($id, $detail)
+    {
+        $siswa = Siswa::find($id)->update($detail);
+        return $siswa;
+    }
 }

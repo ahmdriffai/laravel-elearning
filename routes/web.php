@@ -61,6 +61,8 @@ Route::prefix('admin')
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
                 Route::delete('/{id}', 'delete')->name('delete');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+                Route::put('/{id}', 'update')->name('update');
             });
 
         // Guru
