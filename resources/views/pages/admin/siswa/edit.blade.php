@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('nis', 'Nomer Induk Siswa'); !!}
-                        {!! Form::text('nis', $siswa->nis, ['class' => 'form-control', 'placeholder' => 'ex: 2019150000']) !!}
+                        {!! Form::text('nis', $siswa->nis, ['class' => 'form-control', 'placeholder' => 'ex: 2019150000', 'disabled']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('alamat', 'Alamat'); !!}
@@ -37,7 +37,7 @@
                         {!! Form::label('kelas_id', 'Kelas'); !!}
                         {!! Form::select('kelas_id', $kelas, $siswa->kelas_id, ['class' => 'form-control', 'placeholder' => '-- pilih kelas --']) !!}
                     </div>
-                    {!! Form::submit('Tambah', ['class' => ['btn', 'btn-primary']]); !!}
+                    {!! Form::submit('Ubah', ['class' => ['btn', 'btn-primary']]); !!}
                     {!! Form::close() !!}
                 </div>
             </div>

@@ -65,7 +65,6 @@ class SiswaServiceImpl implements SiswaService
     {
         $detailSiswa = [
             'nama' => $request->input('nama'),
-            'nis' => $request->input('nis'),
             'alamat' => $request->input('alamat'),
             'tanggal_lahir' => $request->input('tanggal_lahir'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),

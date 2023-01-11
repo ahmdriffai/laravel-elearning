@@ -55,4 +55,18 @@ class GuruServiceImpl implements GuruService
             DB::rollBack();
         }
     }
+
+    function update(GuruAddRequest $request, $id)
+    {
+        $detailGuru = [
+            'nama' => $request->input('nama'),
+            'alamat' => $request->input('alamat'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'no_hp' => $request->input('no_hp'),
+        ];
+
+        $guru = $this->guruRepository->update($id, $detailGuru);
+
+        return $guru;
+    }
 }
