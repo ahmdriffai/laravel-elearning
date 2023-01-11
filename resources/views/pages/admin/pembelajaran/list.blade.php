@@ -3,6 +3,7 @@
         <h6 class="m-0 font-weight-bold text-primary">List</h6>
     </div>
     <div class="card-body">
+        <a href="{{ route('admin.pembelajaran.create') }}" class="btn-primary btn my-3">Tambah Pembelajaran</a>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -12,7 +13,6 @@
                     <th>Kelas</th>
                     <th>Guru</th>
                     <th>Pelajaran</th>
-                    <th>Aksi</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -22,7 +22,6 @@
                     <th>Kelas</th>
                     <th>Guru</th>
                     <th>Pelajaran</th>
-                    <th>Aksi</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -39,12 +38,6 @@
                             </td>
                             <td>{{ $item->guru->nama }}</td>
                             <td>{{ $item->pelajaran->nama }}</td>
-                            <td>
-                                <a class="btn btn-sm btn-info">Edit</a>
-                                {!! Form::open( ['route' => ['admin.pelajaran.delete', 'id' => $item->id], 'method' => 'delete'])  !!}
-                                {!! Form::submit('Hapus', ['class' => ['btn', 'btn-sm','btn-danger']]); !!}
-                                {!! Form::close() !!}
-                            </td>
                         </tr>
                 @endforeach
                 </tbody>
