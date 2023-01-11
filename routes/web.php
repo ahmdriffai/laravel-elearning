@@ -38,6 +38,8 @@ Route::prefix('admin')
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
                 Route::delete('/{id}', 'delete')->name('delete');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+                Route::put('/{id}', 'update')->name('update');
             });
         Route::controller(\App\Http\Controllers\Admin\PelajaranController::class)
             ->prefix('pelajaran')
