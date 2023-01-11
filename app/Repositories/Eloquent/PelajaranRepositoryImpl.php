@@ -31,4 +31,13 @@ class PelajaranRepositoryImpl implements PelajaranRepository
         Pelajaran::destroy($id);
     }
 
+    function update($id, $nama, $deskripsi)
+    {
+        $pelajaran = Pelajaran::find($id)->update([
+            'nama' => $nama,
+            'deskripsi' => $deskripsi,
+        ]);
+
+        return $pelajaran;
+    }
 }
