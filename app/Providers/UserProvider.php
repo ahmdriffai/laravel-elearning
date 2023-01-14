@@ -18,9 +18,9 @@ class UserProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(UserRepository::class, UserRepositoryImpl::class);
-        $this->app->singleton(UserService::class, function($app) {
+        $this->app->singleton(UserService::class, function ($app) {
             $userRepository = $app->make(UserRepository::class);
-            return new UserServiceImpl();
+            return new UserServiceImpl($userRepository);
         });
     }
 

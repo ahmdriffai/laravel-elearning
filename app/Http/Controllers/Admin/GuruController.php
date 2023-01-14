@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GuruAddRequest;
+use App\Http\Requests\GuruUpdateRequest;
 use App\Models\Guru;
 use App\Services\GuruService;
 use Illuminate\Http\Request;
@@ -36,5 +37,29 @@ class GuruController extends Controller
         }catch (\Exception $e) {
             abort('Server Error');
         }
+    }
+
+    public function delete($id) {
+        try {
+            Guru::destroy($id);
+            return redirect()->back()->with('success', 'Guru berhasi dihapus');
+        }catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Guru sudah masuk pembelajaran , tidak bisa dihapus !!');
+        }
+    }
+
+    public function update(GuruUpdateRequest $request, $id) {
+
+        try {
+            $guru = $this->guruService->update($request, $id);
+            return redirect()->route('admin.guru.index')
+                ->with('success', 'Guru berhasil ditambah');
+        }catch (\Exception $e) {
+            abort('Server Error');
+        }
+    }
+    public function edit($id) {
+        $guru = Guru::find($id);
+        return view('pages.admin.guru.edit', compact('guru'));
     }
 }

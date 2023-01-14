@@ -16,4 +16,12 @@ class UserRepositoryImpl implements UserRepository
         $user->save();
         return $user;
     }
+
+    function update($id, $detail)
+    {
+        $user = User::find($id);
+        $user->update($detail);
+        $user->save();
+        return $user;
+    }
 }

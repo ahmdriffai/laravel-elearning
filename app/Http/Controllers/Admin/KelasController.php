@@ -39,13 +39,31 @@ class KelasController extends Controller
         }
     }
 
+    public function update(KelasAddRequest $request, $id) {
+        $nama = $request->input('nama');
+        $deskripsi = $request->input('deskripsi');
+
+        try {
+            $this->kelasRepository->update($id, $nama, $deskripsi);
+            return redirect()->route('admin.kelas.index')->with('success', 'Kelas berhasil diubah');
+        }catch (\Exception $exception) {
+            abort(500, "Maaf, Terjadi kesalahan pada server kami");
+        }
+    }
+
     public function delete($id) {
         try {
             $this->kelasRepository->delete($id);
             return redirect()->back()->with('success', 'Kelas berhasi dihapus');
         }catch (\Exception $exception) {
-            abort(500, "Maaf, Terjadi kesalahan pada server kami");
+            return redirect()->back()->with('error', 'Kelas sedang digunakan , tidak bisa dihapus !!');
         }
+    }
+
+    public function edit($id) {
+        $kelas = Kelas::find($id);
+
+        return view('pages.admin.kelas.edit', compact('kelas'));
     }
 
 }

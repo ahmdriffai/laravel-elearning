@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SiswaAddRequest;
+use App\Http\Requests\SiswaUpdateRequest;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Repositories\KelasRepository;
@@ -41,7 +42,28 @@ class SiswaController extends Controller
         }
     }
 
-    public function detail($id) {
+    public function edit($id) {
+        $siswa = Siswa::find($id);
+        $kelas = Kelas::pluck('nama', 'id')->all();
 
+        return view('pages.admin.siswa.edit', compact('siswa', 'kelas'));
+    }
+
+    public function update(SiswaUpdateRequest $request, $id) {
+        try {
+            $this->siswaService->update($request, $id);
+            return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil ditambah');
+        } catch (\Exception $exception) {
+            abort(500, "Maaf, Terjadi kesalahan pada server kami");
+        }
+    }
+
+    public function delete($id) {
+        try {
+            Siswa::destroy($id);
+            return redirect()->back()->with('success', 'Siswa berhasi dihapus');
+        }catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Siswa sudah masuk pembelajaran , tidak bisa dihapus !!');
+        }
     }
 }

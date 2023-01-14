@@ -16,4 +16,10 @@ class GuruRepositoryImpl implements GuruRepository
         $guru->save();
         return $guru;
     }
+
+    function update($id, $detail)
+    {
+        $guru = Guru::find($id)->update($detail);
+        return $guru;
+    }
 }

@@ -32,7 +32,7 @@
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->deskripsi }}</td>
                     <td>
-                        <a class="btn btn-sm btn-info">Edit</a>
+                        <a href="{{ route('admin.kelas.edit', ['id' => $item->id]) }}" class="btn btn-sm btn-info">Edit</a>
                         {!! Form::open( ['route' => ['admin.kelas.delete', 'id' => $item->id], 'method' => 'delete'])  !!}
                         {!! Form::submit('Hapus', ['class' => ['btn', 'btn-sm','btn-danger']]); !!}
                         {!! Form::close() !!}

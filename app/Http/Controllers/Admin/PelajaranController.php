@@ -44,8 +44,27 @@ class PelajaranController extends Controller
             return redirect()->back()->with('success', 'Pelajaran berhasi dihapus');
         }
         catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Pelajaran sedang digunakan , tidak bisa dihapus !!');
+        }
+    }
+
+    public function update(PelajaranAddRequest $request, $id) {
+        $nama = $request->input('nama');
+        $deskripsi = $request->input('deskripsi');
+
+        try {
+            $this->pelajaranRepository->update($id, $nama, $deskripsi);
+            return redirect()->route('admin.pelajaran.index')->with('success', 'Pelajaran berhasil ditambah');
+        } catch (\Exception $exception) {
             abort(500, "Maaf, Terjadi kesalahan pada server kami");
         }
     }
+
+    public function edit($id) {
+        $pelajaran = Pelajaran::find($id);
+
+        return view('pages.admin.pelajaran.edit', compact('pelajaran'));
+    }
+
 }
 

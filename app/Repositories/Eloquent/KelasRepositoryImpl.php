@@ -30,4 +30,14 @@ class KelasRepositoryImpl implements KelasRepository
     {
         return Kelas::all();
     }
+
+    function update($id, $nama, $deskripsi)
+    {
+        $kelas = Kelas::find($id)->update([
+            'nama' => $nama,
+            'deskripsi' => $deskripsi,
+        ]);
+
+        return $kelas;
+    }
 }
