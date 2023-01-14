@@ -31,6 +31,7 @@
                     <div class="form-group">
                         {!! Form::label('file', 'File Materi'); !!}
                         {!! Form::file('file', ['class' => 'form-control']) !!}
+                        <small id="emailHelp" class="form-text text-muted">* ukuran file max. 1M (pdf)</small>
                     </div>
                     <div class="form-group">
                         {!! Form::label('link_youtube', 'Link Youtube'); !!}

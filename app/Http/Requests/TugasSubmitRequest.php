@@ -24,7 +24,7 @@ class TugasSubmitRequest extends FormRequest
     public function rules()
     {
         return [
-            'file_tugas' => ['required', 'mimes:pdf', 'max:10000'],
+            'file_tugas' => ['required', 'mimes:pdf', 'max:1000'],
             'ringkasan_tugas' => ['required'],
             'tugas_id' => ['required'],
         ];

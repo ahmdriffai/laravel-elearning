@@ -15,6 +15,8 @@
                 <div class="custom-file mb-3">
                     {!! Form::file('file_tugas', ['class' => 'custom-file-input', 'id' => 'customFile']) !!}
                     {!! Form::label('file_tugas', 'File Tugas', ['class' => 'custom-file-label']); !!}
+                    <small id="emailHelp" class="form-text text-muted">* ukuran file max. 1M (pdf)</small>
+                
                 </div>
                 <div class="mb-3">
                     {!! Form::label('ringkasan_tugas', 'Ringkasan', ['class' => 'form-label']); !!}

@@ -27,7 +27,7 @@ class TugasAddRequest extends FormRequest
             'judul' => ['required'],
             'ringkasan' => ['required'],
             'pembelajaran_id' => ['required'],
-            'file' => ['required'],
+            'file' => ['required', 'mimes:pdf', 'max:1000'],
         ];
     }
 }
