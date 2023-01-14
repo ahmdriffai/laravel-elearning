@@ -23,11 +23,13 @@
                 </tfoot>
                 <tbody>
 
+                @if(count($pelajaran) == 0)
+                    <tr>
+                        <td colspan="4">Data tidak ditemukan</td>
+                    </tr>
+                @endif
                 @foreach($pelajaran as $item)
                 <tr>
-                    @if(count($pelajaran) == 0)
-                        <td colspan="3">Data tidak ditemukan</td>
-                    @endif
                     <td>#</td>
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->deskripsi }}</td>

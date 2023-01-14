@@ -23,7 +23,7 @@ class TahunAjaranRepositoryImpl implements TahunAjaranRepository
 
     function updateIsActiveAll($isActive)
     {
-        DB::table('tahun_ajaran')->update(['is_active', $isActive]);
+        DB::table('tahun_ajaran')->update(['is_active' => $isActive]);
     }
 
     function delete($id)

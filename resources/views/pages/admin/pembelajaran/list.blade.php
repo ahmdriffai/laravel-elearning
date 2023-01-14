@@ -1,6 +1,6 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">List</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Daftar Pembelajaran Tahun Ajaran {{ $tahunAjaran->tahun }} / {{ $tahunAjaran->semester }}</h6>
     </div>
     <div class="card-body">
         <a href="{{ route('admin.pembelajaran.create') }}" class="btn-primary btn my-3">Tambah Pembelajaran</a>
@@ -25,12 +25,13 @@
                 </tr>
                 </tfoot>
                 <tbody>
-
+                @if(true)
+                    <tr>
+                        <td colspan="5">Data tidak ditemukan</td>
+                    </tr>
+                @endif
                 @foreach($pembelajaran as $item)
                         <tr>
-                            @if(count($pembelajaran) == 0)
-                                <td colspan="3">Data tidak ditemukan</td>
-                            @endif
                             <td>#</td>
                             <td>{{ $item->tahunAjaran->tahun }} / {{ $item->tahunAjaran->semester }}</td>
                             <td>

@@ -10,25 +10,31 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Pelajaran;
 use App\Models\Pembelajaran;
+use App\Repositories\PembelajaranReposiory;
+use App\Repositories\TahunAjaranRepository;
 use App\Services\PembelajaranService;
 use Illuminate\Http\Request;
 
 class PembelajaranController extends Controller
 {
     private $pembelajaranService;
+    private $tahunAjaranRepository;
 
     /**
      * PembelajaranController constructor.
      * @param $pembelajaranService
      */
-    public function __construct(PembelajaranService $pembelajaranService)
+    public function __construct(PembelajaranService $pembelajaranService, TahunAjaranRepository $tahunAjaranRepository)
     {
+
         $this->pembelajaranService = $pembelajaranService;
+        $this->tahunAjaranRepository = $tahunAjaranRepository;
     }
 
     public function index() {
-        $pembelajaran = Pembelajaran::all();
-        return view('pages.admin.pembelajaran.index', compact('pembelajaran'));
+        $tahunAjaran = $this->tahunAjaranRepository->findByIsActive();
+        $pembelajaran = Pembelajaran::where('tahun_ajaran_id', $tahunAjaran->id)->get();
+        return view('pages.admin.pembelajaran.index', compact('pembelajaran', 'tahunAjaran'));
     }
 
     public function create() {
