@@ -22,9 +22,21 @@
                         <span class="badge badge-warning">Telat mengumpulkan</span>
                     @endif
                 </h6>
-                <div class="text-xs font-weight-bold @if(strtotime(Carbon::now()) > strtotime($item->deadline) && strtotime($tugasSiswa->created_at) ?? 0 > strtotime($item->deadline)) text-danger @else text-dark @endif text-capitalize my-1">
-                Tenggat : {{ Carbon::createFromFormat('Y-m-d', $item->deadline)->format('d M, Y') }}
-                </div>
+                @if(strtotime(Carbon::now()) > strtotime($item->deadline))
+                    @if($tugasSiswa == null)
+                        <div class="text-xs font-weight-bold  text-danger text-capitalize my-1">
+                        Tenggat : {{ Carbon::createFromFormat('Y-m-d', $item->deadline)->format('d M, Y') }}
+                        </div>
+                    @else
+                        <div class="text-xs font-weight-bold  text-dark text-capitalize my-1">
+                        Tenggat : {{ Carbon::createFromFormat('Y-m-d', $item->deadline)->format('d M, Y') }}
+                        </div>
+                    @endif
+                @else
+                    <div class="text-xs font-weight-bold  text-dark text-capitalize my-1">
+                    Tenggat : {{ Carbon::createFromFormat('Y-m-d', $item->deadline)->format('d M, Y') }}
+                    </div>
+                @endif
             </a>
             <!-- Card Content - Collapse -->
             <div class="collapse" id="tugas{{ $item->id }}">
