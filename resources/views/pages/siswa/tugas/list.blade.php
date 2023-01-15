@@ -22,7 +22,7 @@
                         <span class="badge badge-warning">Telat mengumpulkan</span>
                     @endif
                 </h6>
-                <div class="text-xs font-weight-bold @if(strtotime(Carbon::now()) > strtotime($item->deadline) && strtotime($tugasSiswa->created_at) > strtotime($item->deadline)) text-danger @else text-dark @endif text-capitalize my-1">
+                <div class="text-xs font-weight-bold @if(strtotime(Carbon::now()) > strtotime($item->deadline) && strtotime($tugasSiswa->created_at) ?? 0 > strtotime($item->deadline)) text-danger @else text-dark @endif text-capitalize my-1">
                 Tenggat : {{ Carbon::createFromFormat('Y-m-d', $item->deadline)->format('d M, Y') }}
                 </div>
             </a>
