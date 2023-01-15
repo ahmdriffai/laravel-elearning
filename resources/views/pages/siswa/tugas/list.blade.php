@@ -16,9 +16,10 @@
                 <h6 class="m-0 font-weight-bold text-primary"> 
                     {{ $item->judul }}
                     @if($tugasSiswa != null)
-                        <span class="badge badge-success">Dikumpulkan</span>
                         @if(strtotime($tugasSiswa->created_at) > strtotime($item->deadline))
                             <span class="badge badge-warning">Telat mengumpulkan</span>
+                        @else
+                            <span class="badge badge-success">Dikumpulkan</span>
                         @endif
                     @endif
                 </h6>
