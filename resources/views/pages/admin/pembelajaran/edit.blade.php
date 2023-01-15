@@ -8,7 +8,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabmah Pembelajaran</h6>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['route' => ['admin.pembelajaran.update', ['id' => $pembelajaran->id]], 'method' => 'post']) !!}
+                    {!! Form::open(['route' => ['admin.pembelajaran.update', ['id' => $pembelajaran->id]], 'method' => 'put']) !!}
                     <div class="form-group">
                         {!! Form::label('guru_id', 'Guru'); !!}
                         {!! Form::select('guru_id',$guru, $pembelajaran->guru_id, ['class' => ['form-control', 'select2'], 'placeholder' => 'Pilih guru']) !!}
@@ -19,9 +19,9 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('kelas_id', 'Kelas'); !!}
-                        {!! Form::select('kelas_id[]',$kelas, $pembelajaran->kelas->pluck('id'), ['multiple ','class' => ['form-control', 'select2']]) !!}
+                        {!! Form::select('kelas_id', $kelas, $pembelajaran->kelas_id, ['class' => ['form-control', 'select2'], 'placeholder' => 'Pilih kelas']) !!}
                     </div>
-                    {!! Form::submit('Tambah', ['class' => ['btn', 'btn-primary']]); !!}
+                    {!! Form::submit('Ubah', ['class' => ['btn', 'btn-primary']]); !!}
                     {!! Form::close() !!}
                 </div>
             </div>

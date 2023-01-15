@@ -47,7 +47,7 @@ class PembelajaranController extends Controller
     public function store(PembelajaranAddRequest $request) {
         try {
             $this->pembelajaranService->add($request);
-            return redirect()->route('admin.pembelajaran.index')->with('succes', 'Berhasil menambahkan pembelajaran');
+            return redirect()->route('admin.pembelajaran.index')->with('success', 'Berhasil menambahkan pembelajaran');
         } catch (PembelajaranIsExist $exception) {
             return redirect()->back()
                 ->with('error', $exception->getMessage())
@@ -59,4 +59,36 @@ class PembelajaranController extends Controller
         }
     }
 
+    public function edit($id) {
+        $guru = Guru::pluck('nama', 'id')->all();
+        $kelas = Kelas::pluck('nama', 'id')->all();
+        $pelajaran = Pelajaran::pluck('nama', 'id')->all();
+        $pembelajaran = Pembelajaran::find($id);
+        return view('pages.admin.pembelajaran.edit', compact('pembelajaran', 'guru', 'kelas', 'pelajaran'));
+    }
+
+    public function update(PembelajaranAddRequest $request, $id) {
+        try {
+            $pembelajaran = $this->pembelajaranService->update($id, $request);
+            return redirect()->route('admin.pembelajaran.index')->with('success', 'Berhasil mengubah pembelajaran');
+        } catch (PembelajaranIsExist $exception) {
+            return redirect()->back()
+                ->with('error', $exception->getMessage())
+                ->withInput($request->all());
+        }catch (TahunAjaranNotExistException $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }catch (\Exception $exception) {
+            dd($exception);
+            abort(500, 'Server Error');
+        }
+    }
+
+    public function delete($id) {
+        try {
+            Pembelajaran::destroy($id);
+            return redirect()->back()->with('success', 'Pembelajaran berhasi dihapus');
+        }catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Pembelajaran sedang digunakan , tidak bisa dihapus !!');
+        }
+    }
 }

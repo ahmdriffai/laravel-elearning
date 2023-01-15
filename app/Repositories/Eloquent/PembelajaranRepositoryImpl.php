@@ -28,4 +28,10 @@ class PembelajaranRepositoryImpl implements PembelajaranReposiory
             ->where('kelas_id', $kelasId)
             ->first();
     }
+
+    function update($id, $detail)
+    {
+        $pembelajaran = Pembelajaran::find($id)->update($detail);
+        return $pembelajaran;
+    }
 }

@@ -13,6 +13,7 @@
                     <th>Kelas</th>
                     <th>Guru</th>
                     <th>Pelajaran</th>
+                    <th>Aksi</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -22,10 +23,11 @@
                     <th>Kelas</th>
                     <th>Guru</th>
                     <th>Pelajaran</th>
+                    <th>Aksi</th>
                 </tr>
                 </tfoot>
                 <tbody>
-                @if(true)
+                @if(count($pembelajaran) == 0)
                     <tr>
                         <td colspan="5">Data tidak ditemukan</td>
                     </tr>
@@ -39,6 +41,12 @@
                             </td>
                             <td>{{ $item->guru->nama }}</td>
                             <td>{{ $item->pelajaran->nama }}</td>
+                            <td>
+                                <a href="{{ route('admin.pembelajaran.edit', ['id' => $item->id]) }}" class="btn btn-sm btn-info">Edit</a>
+                                {!! Form::open( ['route' => ['admin.pembelajaran.delete', 'id' => $item->id], 'method' => 'delete'])  !!}
+                                {!! Form::submit('Hapus', ['class' => ['btn', 'btn-sm','btn-danger']]); !!}
+                                {!! Form::close() !!}
+                            </td>
                         </tr>
                 @endforeach
                 </tbody>

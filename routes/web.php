@@ -100,6 +100,8 @@ Route::prefix('admin')
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+                Route::put('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'delete')->name('delete');
             });
 

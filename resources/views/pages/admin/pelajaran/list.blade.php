@@ -38,6 +38,7 @@
                         {!! Form::open( ['route' => ['admin.pelajaran.delete', 'id' => $item->id], 'method' => 'delete'])  !!}
                         {!! Form::submit('Hapus', ['class' => ['btn', 'btn-sm','btn-danger']]); !!}
                         {!! Form::close() !!}
+                    </td>
                 </tr>
                 @endforeach
                 </tbody>
