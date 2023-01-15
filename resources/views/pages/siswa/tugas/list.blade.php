@@ -6,16 +6,19 @@
         </div>
     @endif
     @foreach($tugas as $item)
+        @php(
+            $tugasSiswa = DB::table('tugas_siswa')->where('siswa_id', Auth::user()->siswa->id )->where('tugas_id', $item->id)->first()
+        )
         <div class="card border mb-4">
             <!-- Card Header - Accordion -->
             <a href="#tugas{{ $item->id }}" class="d-block card-header py-3" data-toggle="collapse"
                role="button" aria-expanded="true" aria-controls="tugas{{ $item->id }}">
-                <h6 class="m-0 font-weight-bold text-primary">
+                <h6 class="m-0 font-weight-bold text-primary"> 
                     {{ $item->judul }}
-                    @if(count($item->siswa) != 0)
+                    @if($tugasSiswa != null)
                         <span class="badge badge-success">Dikumpulkan</span>
                     @endif
-                    @if(strtotime($item->created_at) > strtotime($item->deadline))
+                    @if(strtotime($item->created_at) > strtotime($item->deadline) && $tugasSiswa != null)
                         <span class="badge badge-warning">Telat mengumpulkan</span>
                     @endif
                 </h6>
@@ -31,10 +34,9 @@
                     <a target="_blank" href="{{ Storage::disk('public')->url($item->file) }}">View / Download</a>
                 </div>
                 <div class="card-footer">
-                    @if(count($item->siswa) != 0)
+                    @if($tugasSiswa != null)
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#staticBackdrop{{ $item->id }}">
                             Submit Ulang Tugas
-
                         </button>
                         <a href="{{ Storage::disk('public')->url($item->siswa->first()->pivot->file_tugas) }}">file-tugas.pdf</a>
                     @else
