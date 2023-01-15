@@ -17,9 +17,9 @@
                     {{ $item->judul }}
                     @if($tugasSiswa != null)
                         <span class="badge badge-success">Dikumpulkan</span>
-                    @endif
-                    @if(strtotime($item->created_at) > strtotime($item->deadline) && $tugasSiswa != null)
-                        <span class="badge badge-warning">Telat mengumpulkan</span>
+                        @if(strtotime($tugasSiswa->created_at) > strtotime($item->deadline))
+                            <span class="badge badge-warning">Telat mengumpulkan</span>
+                        @endif
                     @endif
                 </h6>
                 @if(strtotime(Carbon::now()) > strtotime($item->deadline))
