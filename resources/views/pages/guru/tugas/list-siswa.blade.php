@@ -8,6 +8,7 @@
             <th>Nis</th>
             <th>File Tugas</th>
             <th>Pengumpulan</th>
+            <th>Status</th>
             <th>Nilai</th>
             <th>Action</th>
         </tr>
@@ -19,6 +20,7 @@
             <th>Nis</th>
             <th>File Tugas</th>
             <th>Pengumpulan</th>
+            <th>Status</th>
             <th>Nilai</th>
             <th>Action</th>
 
@@ -38,6 +40,13 @@
                 <a target="_blank" href="{{ Storage::disk('public')->url($item->pivot->file_tugas) }}">View / Download</a>
             </td>
             <td>{{ $item->pivot->created_at }}</td>
+            <td>
+                @if(strtotime($item->pivot->created_at) > strtotime($tugas->deadline))
+                    <span class="badge badge-warning">Telat mengumpulkan</span>
+                @else
+                    <span class="badge badge-success">Mengumpulkan</span>
+                @endif
+            </td>
             <td>{{ $item->pivot->nilai }}</td>
             <td>
                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#staticBackdrop{{ $item->id }}">

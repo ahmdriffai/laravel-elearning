@@ -10,10 +10,18 @@
             <!-- Card Header - Accordion -->
             <a href="#tugas{{ $item->id }}" class="d-block card-header py-3" data-toggle="collapse"
                role="button" aria-expanded="true" aria-controls="tugas{{ $item->id }}">
-                <h6 class="m-0 font-weight-bold text-primary">{{ $item->judul }}</h6>
-                @if(count($item->siswa) != 0)
-                    <span class="badge badge-success">Dikumpulkan</span>
-                @endif
+                <h6 class="m-0 font-weight-bold text-primary">
+                    {{ $item->judul }}
+                    @if(count($item->siswa) != 0)
+                        <span class="badge badge-success">Dikumpulkan</span>
+                    @endif
+                    @if(strtotime($item->created_at) > strtotime($item->deadline))
+                        <span class="badge badge-warning">Telat mengumpulkan</span>
+                    @endif
+                </h6>
+                <div class="text-xs font-weight-bold @if(strtotime(Carbon::now()) > strtotime($item->deadline)) text-danger @else text-dark @endif text-capitalize my-1">
+                Tenggat : {{ Carbon::createFromFormat('Y-m-d', $item->deadline)->format('d M, Y') }}
+                </div>
             </a>
             <!-- Card Content - Collapse -->
             <div class="collapse" id="tugas{{ $item->id }}">

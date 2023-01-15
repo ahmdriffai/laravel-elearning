@@ -26,9 +26,12 @@
                         {!! Form::label('file', 'File Tugas'); !!}
                         {!! Form::file('file', ['class' => 'form-control']) !!}
                         <small id="emailHelp" class="form-text text-muted">* ukuran file max. 1M (pdf)</small>
-
                     </div>
-                    {!! Form::submit('Tambah', ['class' => ['btn', 'btn-primary']]); !!}
+                    <div class="form-group">
+                        {!! Form::label('deadline', 'Pengumpulan Akhir'); !!}
+                        {!! Form::date('deadline',null ,['class' => 'form-control', 'min' => Carbon::now()->format('Y-m-d')]) !!}
+                    </div>
+                    {!! Form::submit('Tambah',['class' => ['btn', 'btn-primary']]); !!}
                     {!! Form::close() !!}
                 </div>
             </div>

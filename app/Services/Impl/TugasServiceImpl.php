@@ -27,6 +27,7 @@ class TugasServiceImpl implements TugasService
             'judul' => $request->input('judul'),
             'ringkasan' => $request->input('ringkasan'),
             'pembelajaran_id' => $request->input('pembelajaran_id'),
+            'deadline' => $request->input('deadline'),
         ];
 
         return $this->tugasRepository->create($detail);
