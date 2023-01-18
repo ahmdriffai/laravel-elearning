@@ -4,6 +4,12 @@
     </div>
     <div class="card-body">
         <a href="{{ route('admin.siswa.create') }}" class="btn-primary btn my-3">Tambah Siswa</a>
+        
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            Import Excel
+        </button>
+        @include('pages.admin.siswa.import')
+
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>

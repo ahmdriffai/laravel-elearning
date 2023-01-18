@@ -10,4 +10,5 @@ interface KelasRepository
     function delete($id);
     function update($id, $nama, $deskripsi);
     function getAll();
+    function findByName($name);
 }

@@ -3,22 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MahasiswaImportRequest;
 use App\Http\Requests\SiswaAddRequest;
 use App\Http\Requests\SiswaUpdateRequest;
+use App\Imports\SiswaImport;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Repositories\KelasRepository;
 use App\Repositories\SiswaRepository;
+use App\Repositories\UserRepository;
 use App\Services\SiswaService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
     private $siswaService;
+    private $siswaRepository;
+    private $kelasRepository;
+    private $userRepository;
 
-    public function __construct(SiswaService $siswaService)
+    public function __construct(SiswaService $siswaService, 
+                        KelasRepository $kelasRepository, 
+                        SiswaRepository $siswaRepository,
+                        UserRepository $userRepository
+                        )
     {
         $this->siswaService = $siswaService;
+        $this->siswaRepository = $siswaRepository;
+        $this->kelasRepository = $kelasRepository;
+        $this->userRepository = $userRepository;
     }
 
 
@@ -63,6 +77,16 @@ class SiswaController extends Controller
             Siswa::destroy($id);
             return redirect()->back()->with('success', 'Siswa berhasi dihapus');
         }catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Siswa sudah masuk pembelajaran , tidak bisa dihapus !!');
+        }
+    }
+
+    public function import(MahasiswaImportRequest $request) {
+        try {
+            Excel::import(new SiswaImport($this->siswaRepository, $this->kelasRepository, $this->userRepository), $request->file('file'));
+            return redirect()->back()->with('success', 'Siswa berhasi dihapus');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Siswa sudah masuk pembelajaran , tidak bisa dihapus !!');
         }
     }

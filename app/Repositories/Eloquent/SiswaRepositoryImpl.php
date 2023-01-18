@@ -33,4 +33,10 @@ class SiswaRepositoryImpl implements SiswaRepository
         $siswa = Siswa::find($id)->update($detail);
         return $siswa;
     }
+
+    function findByNim($nis)
+    {
+        $siswa = Siswa::where('nis', $nis)->first();
+        return $siswa;
+    }
 }

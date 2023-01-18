@@ -40,4 +40,11 @@ class KelasRepositoryImpl implements KelasRepository
 
         return $kelas;
     }
+
+    function findByName($name)
+    {
+        $kelas = Kelas::where('nama', $name)->first();
+
+        return $kelas;
+    }
 }
