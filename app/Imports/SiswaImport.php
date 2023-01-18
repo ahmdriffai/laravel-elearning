@@ -45,17 +45,19 @@ class SiswaImport implements ToCollection, WithStartRow
                 } else if($siswa == null) {
                     try {
                         DB::beginTransaction();
+                        $user = $this->userRepository->create([
+                            'username' => $row[1],
+                            'password' => Hash::make($row[1]),
+                            'role' => 'siswa',
+                        ]);
                         $this->siswaRepository->create([
                             'nis' => $row[1],
                             'nama' => $row[2],
                             'jenis_kelamin' => $row[3],
                             'kelas_id' => $kelas->id,
+                            'user_id' => $user->id
                         ]);
-                        $this->userRepository->create([
-                            'username' => $row[1],
-                            'password' => Hash::make($row[1]),
-                            'role' => 'siswa',
-                        ]);
+                        
                         DB::commit();
                     } catch (\Exception $e) {
                         DB::rollBack();

@@ -31,7 +31,7 @@
                             <td colspan="3">Data tidak ditemukan</td>
                         @endif
                         <td>#</td>
-                        <td>{{ $item->siswa()->nama ?? $item->guru->nama ?? $item->username }}</td>
+                        <td>{{ $item->siswa->nama ?? $item->guru->nama ?? $item->username }}</td>
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->role }}</td>
                         <td>
