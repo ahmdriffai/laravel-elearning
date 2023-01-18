@@ -9,11 +9,13 @@ use App\Http\Requests\SiswaUpdateRequest;
 use App\Imports\SiswaImport;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
 use App\Repositories\KelasRepository;
 use App\Repositories\SiswaRepository;
 use App\Repositories\UserRepository;
 use App\Services\SiswaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
@@ -74,9 +76,16 @@ class SiswaController extends Controller
 
     public function delete($id) {
         try {
-            Siswa::destroy($id);
+            DB::beginTransaction();
+            $siswa = Siswa::find($id);
+            $user = User::find($siswa->user_id);
+            $siswa->delete();
+            $user->delete();
+            DB::commit();
             return redirect()->back()->with('success', 'Siswa berhasi dihapus');
         }catch (\Exception $exception) {
+            dd($exception->getMessage());
+            DB::rollBack();
             return redirect()->back()->with('error', 'Siswa sudah masuk pembelajaran , tidak bisa dihapus !!');
         }
     }
